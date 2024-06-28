@@ -24,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (count === 15) {
                 clearInterval(timerId)
                 let downTimerId = setInterval(() => {
-                    console.log('going dowwwwn')
                     if (count === 0) {
                         clearInterval(downTimerId)
                         isJumping = false
