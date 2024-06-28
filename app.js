@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const dino = document.querySelector('.dino');
+    const sasha = document.querySelector('.sasha');
     const grid = document.querySelector(".grid");
     const alert = document.getElementById('alert')
     let gravity = 0.9
@@ -32,20 +32,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     position -= 5
                     count--
                     position = position * gravity
-                    dino.style.bottom = position + 'px'
+                    sasha.style.bottom = position + 'px'
                 }, 20)
             }
             // move up
             position += 30
             count++
             position = position * gravity;
-            dino.style.bottom = position + 'px'
+            sasha.style.bottom = position + 'px'
         }, 20)
     }
 
     function generateObstacles() {
         if (!isGameOver) {
-            let randomTime = Math.random() * 4000;
+            let randomTime = Math.random() * (4000 - 500) + 500;
             let obstaclePosition = 1000;
             const obstacle = document.createElement('div')
             obstacle.classList.add('obstacle')
@@ -55,8 +55,10 @@ document.addEventListener('DOMContentLoaded', () => {
             let timerId = setInterval(() => {
                 if (obstaclePosition > 0 && obstaclePosition < 60 && position < 60) {
                     clearInterval(timerId)
-                    alert.innerHTML = "Game Over"
+
+                    alert.style.visibility = "visible"
                     isGameOver = true;
+
                     //remove all children
                     while (grid.firstChild) {
                         grid.removeChild(grid.lastChild)

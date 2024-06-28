@@ -1,6 +1,6 @@
 @keyframes slideright {
     from{
-        background-position: 70000%;
+        background-position: 50000%;
     }
     to {
         background-position: 0%;
@@ -9,15 +9,23 @@
 
 #desert {
     position: absolute;
-    background-image: url("t-rex-background.png");
+    background-image: url("beach_background.png");
     height: 200px;
     width: 100%;
     animation: slideright 600s infinite linear;
     bottom: 0;
 }
 
-.dino {
-    background-image: url("t-rex.png");
+#alert {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+}
+
+.sasha {
+    background-image: url("sasha.png");
     height: 60px;
     width: 60px;
     position: absolute;
@@ -25,12 +33,12 @@
 }
 
 .obstacle {
-    background-image: url('cacti.png');
-    width: 60px;
-    height: 60px;
+    background-image: url('sand_castle.png');
+    width: 50px;
+    height: 50px;
     position: absolute;
     bottom: 0;
 }
 body {
-    background-color: rgb(250, 250, 250);
+    background-color: #87cefa;
 }
