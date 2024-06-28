@@ -66,8 +66,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 obstaclePosition -= 10;
                 obstacle.style.left = obstaclePosition + 'px'
+
+                const levelOne = grid.querySelectorAll('.obstacle').length
+                if (levelOne > 10) {
+                    randomTime = Math.random() * 2000;
+                    (console.log('Level 2'))
+                }
             }, 20)
             setTimeout(generateObstacles, randomTime)
+
+            const levelOne = grid.querySelectorAll('.obstacle').length
+            if (levelOne > 10) {
+                randomTime = Math.random() * 3000
+            }
         }
     }
     generateObstacles();
