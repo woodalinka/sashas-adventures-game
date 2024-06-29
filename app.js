@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let gravity = 0.9
     let isJumping = false;
     let isGameOver = false;
+    let obstacleCount = 0
 
     function control(e) {
         if (e.code === "Space") {
@@ -13,9 +14,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
+
     document.addEventListener('keyup', control)
 
     let position = 0
+
     function jump() {
         isJumping = true
         let count = 0
@@ -45,8 +48,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function generateObstacles() {
         if (!isGameOver) {
             let randomTime = Math.random() * (4000 - 500) + 500;
-            let obstaclePosition = 1000;
+
+            console.log(randomTime)
             const obstacle = document.createElement('div')
+            let obstaclePosition = 1000;
             obstacle.classList.add('obstacle')
             grid.appendChild(obstacle)
             obstacle.style.left = obstaclePosition + 'px'
@@ -67,19 +72,50 @@ document.addEventListener('DOMContentLoaded', () => {
                 obstaclePosition -= 10;
                 obstacle.style.left = obstaclePosition + 'px'
 
-                const levelOne = grid.querySelectorAll('.obstacle').length
-                if (levelOne > 10) {
-                    randomTime = Math.random() * 2000;
-                    (console.log('Level 2'))
+                if (obstaclePosition < 0) {
+                    clearInterval(timerId);
+                    grid.removeChild(obstacle)
+                    obstacleCount++
+                    console.log(obstacleCount)
+
+                    if (obstacleCount >= 3) {
+                        generateSecondObstacle();
+                        console.log("Lever up")
+                    } else {
+                        setTimeout(generateObstacles, randomTime)
+                    }
                 }
             }, 20)
-            setTimeout(generateObstacles, randomTime)
-
-            const levelOne = grid.querySelectorAll('.obstacle').length
-            if (levelOne > 10) {
-                randomTime = Math.random() * 3000
-            }
         }
     }
-    generateObstacles();
+
+    function generateSecondObstacle() {
+        if (!isGameOver) {
+            let randomTime = Math.random() * (2000 - 500) + 500;
+            console.log(randomTime, 'second level timer')
+            console.log('Level 2');
+            const obstacle2 = document.createElement('div')
+            let obstacle2Position = 1000;
+            obstacle2.classList.add('obstacle2')
+            grid.appendChild(obstacle2)
+
+            let secondTimerId = setInterval(() => {
+                if (obstacle2Position > 0 && obstacle2Position < 60 && position < 60) {
+                    clearInterval(secondTimerId)
+                    isGameOver = true
+                    alert.style.visibility = 'visible'
+
+                    while (grid.firstChild) {
+                        grid.removeChild(grid.lastChild)
+                    }
+                }
+
+                obstacle2Position -= 10;
+                obstacle2.style.left = obstacle2Position + 'px'
+
+            }, 20)
+            setTimeout(generateSecondObstacle, randomTime)
+        }
+    }
+        generateObstacles();
 })
